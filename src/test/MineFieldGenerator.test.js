@@ -1,19 +1,22 @@
-import each from "jest-each";
-import MineFieldGenerator, { prepareParams } from "../MineFieldGenerator";
+import each from 'jest-each';
+import MineFieldGenerator from '../MineFieldGenerator';
 
 each([
   ["beginner", 9, 9, 10],
   ["intermediate", 13, 15, 40],
   ["expert", 16, 30, 99],
   ["custom", 1, 1, 0],
-  ["custom", 50, 50, 10]
+  ["custom", 50, 50, 50 * 50 - 1]
 ]).it(
   "generates field with correct amount of boxes and mines",
   (difficulty, rows, columns, mines) => {
     let minesCount = 0;
 
     const field = new MineFieldGenerator().generateField(
-      ...prepareParams(difficulty, rows, columns, mines)
+      difficulty,
+      rows,
+      columns,
+      mines
     );
 
     expect(field.length).toBe(rows);

@@ -6,15 +6,6 @@ const shuffle = ([...a]) => {
   return a;
 };
 
-export const prepareParams = props => {
-  const {difficulty, rows, columns, mines} = props;
-  const params = [difficulty];
-  if (difficulty === 'custom') {
-    params.push(rows, columns, mines);
-  }
-  return params;
-};
-
 class MineFieldGenerator {
   generateField (difficulty, width = 1, height = 1, mines = 0) {
     switch (difficulty) {
@@ -35,13 +26,13 @@ class MineFieldGenerator {
         break;
       default:
         if (width < 1) {
-          throw new Error('lul what');
+          throw new Error('to narrow');
         }
         if (height < 1) {
-          throw new Error('lul what');
+          throw new Error('to low');
         }
         if (mines < 0) {
-          throw new Error('lul what');
+          throw new Error('negative mines?');
         }
         this.width = width;
         this.height = height;
@@ -49,7 +40,7 @@ class MineFieldGenerator {
     }
 
     if (this.width * this.height <= this.mines) {
-      throw new Error('lul what');
+      throw new Error('need to have at least 1 box mine-free');
     }
 
     const minesLocation = this.distributeMines();

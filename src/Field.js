@@ -1,10 +1,15 @@
 import React from "react";
 import "./Field.css";
 import Box from "./Box";
-import MineFieldGenerator, { prepareParams } from "./MineFieldGenerator";
+import MineFieldGenerator from "./MineFieldGenerator";
 
-const Field = props => {
-  const field = new MineFieldGenerator().generateField(...prepareParams(props));
+const Field = ({ difficulty, rows, columns, mines }) => {
+  const field = new MineFieldGenerator().generateField(
+    difficulty,
+    rows,
+    columns,
+    mines
+  );
   return (
     <table data-testid="Field">
       <tbody>
@@ -20,6 +25,11 @@ const Field = props => {
       </tbody>
     </table>
   );
+};
+Field.defaultProps = {
+  rows: 1,
+  columns: 1,
+  mines: 0
 };
 
 export default Field;
