@@ -1,6 +1,6 @@
-import React from 'react';
 import '@testing-library/jest-dom/extend-expect';
-import {fireEvent, render} from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
+import React from 'react';
 import App from '../App';
 
 it('renders without crashing', () => {
@@ -14,9 +14,12 @@ it('renders a mine field', () => {
 });
 
 it('re-renders a new mine field', () => {
-  const { getByTestId } = render(<App />);
+  const { getByTestId, getAllByTestId } = render(<App />);
   expect(getByTestId('App')).toBeDefined();
-  const newGameButton = getByTestId('newGameButton');
-  fireEvent.click(newGameButton);
-  expect(newGameButton).toBeDisabled();
+  fireEvent.click(getByTestId('newGameButton'));
+  const boxes = getAllByTestId("Box");
+  expect(boxes).toHaveLength(9 * 9);
+  boxes.forEach(e => {
+    expect(e).toBeEnabled();
+  });
 });
