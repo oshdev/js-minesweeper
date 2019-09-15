@@ -14,9 +14,9 @@ const Field = ({ difficulty, rows, columns, mines }) => {
     <table data-testid="Field">
       <tbody>
         {field.map((row, rowIndex) => (
-          <tr key={rowIndex}>
+          <tr key={Math.random()}>
             {row.map((column, columnIndex) => (
-              <td key={columnIndex}>
+              <td key={Math.random()}>
                 <Box isMine={column} />
               </td>
             ))}

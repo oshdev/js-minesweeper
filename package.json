@@ -5,7 +5,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts src/test",
+    "test": "react-scripts test src/test",
     "eject": "react-scripts eject"
   },
   "dependencies": {
